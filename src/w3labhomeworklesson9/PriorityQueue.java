@@ -1,61 +1,152 @@
 package w3labhomeworklesson9;
 
-public class PriorityQueue 
-{
-	PriorityQueue next;
-	int data;
-	
-	PriorityQueue()
+
+	class PriorityQueue
 	{
-		this.next = null;
-	}
-}
-class LinkedList
-{
-	PriorityQueue first = null;
-	PriorityQueue last = null;
-	
-	public void add(int value)
-	{
+		int data;
+		PriorityQueue next;
 		
-		PriorityQueue node = new PriorityQueue();
-		if(first == null)
+		PriorityQueue(int data)
 		{
-			first = node;			
+			this.data = data;
+			next =null;
+		}
+		
+	}
+
+ class PriorityQueueOperation {
+		PriorityQueue first;
+		PriorityQueue last;
+		
+		//Add
+		public void add(int data)
+		{
+			PriorityQueue newNode = new PriorityQueue(data);
+			if(first==null) //empty queue
+				first = newNode;
+			else if(last == null) // there is only one element--(first)
+			{
+				if(first.data > data)
+				{
+					PriorityQueue temp = first;
+					first = newNode;
+					last = temp;
+					first.next = temp;
+				}
+				else
+				{
+					last=newNode;
+					first.next=newNode;
+				}
 			}
-		else if(last == null)
-		{
-		  if(first.data > value)
-		  {
-			  PriorityQueue n1 = first;
-			  first.data = value;
-			  last = n1;  
-		  }
-		  else{
-			  PriorityQueue tempprev = first;
-			  PriorityQueue temp = first;
-			  
-			  while(value > temp.data )
-			  {
-				  temp = temp.next;
-				  tempprev = temp;
-			 }
-			  tempprev.next = node;
-			  node.next= temp; 
-			  
-			  
-			  
-		  }
+			else//if there is more than one element in the queue
+			{
+				if(data>last.data)//
+				{
+					PriorityQueue temp = last;
+					last = newNode;
+					temp.next = newNode;
+				}
+				else
+				{
+					PriorityQueue temp = first;
+					PriorityQueue prevTemp=first;
+					int count=0;
+					while(temp!=null && data> temp.data)
+					{
+						prevTemp = temp;
+						temp = temp.next;
+						count++;
+					}
+					newNode.next = temp; 
+					if(count == 0)
+						first = newNode;
+					if(count!=0)
+						prevTemp.next = newNode;
+					
+				}
+			}
 		}
-		else
-		{
-			
-		}
-	}
-	
-	public static void main(String[] args) {
 		
+		
+		//Remove
+		/*public void remove()
+		{
+			PriorityQueue firstTemp = first;
+			PriorityQueue nextTemp = firstTemp.next;
+			while(firstTemp !=null && nextTemp !=null)
+			{
+				if(firstTemp.data> nextTemp.data)
+					firstTemp = firstTemp.next;	
+				else
+					nextTemp = nextTemp.next;
+			}
+			System.out.println("Removed element is :"+firstTemp.data);
+			firstTemp = null;
+		}*/
+		
+		//check empty
+		public boolean isEmpty()
+		{
+			if(first == null)
+				return true;
+			else
+				return false;
+		}
 
+		//Size
+		public int size()
+		{
+			PriorityQueue temp = first;
+			int count=0;
+			while(temp!=null)
+			{
+				temp = temp.next;
+				count++;
+			}
+			return count;
+		}
+		
+		//Peek the front element in the queue
+		public PriorityQueue peek()
+		{
+			return first;
+		}
+		
+		public String toString()
+		{
+			String str =""; 
+			PriorityQueue temp = first; 
+			while (temp != null) {
+				str = str + "==>[" + temp.data + "]";
+				temp = temp.next;
+			}
+			str = str + "==>[" + "NULL" + "]";
+			return str;
+		}
+		
+		public static void main(String[] agrs)
+		{
+			System.out.println("Inserting data \"12 , 10, 9, 15 ,13 \"");
+			PriorityQueueOperation obj = new PriorityQueueOperation();
+			obj.add(12);
+			obj.add(10);
+			obj.add(9);
+			obj.add(15);
+			obj.add(13);
+		
+			System.out.println();
+			System.out.println("The priority queue after insertion:");
+			System.out.println(obj);
+			
+			System.out.println();
+			System.out.println("Is queue empty? "+obj.isEmpty());
+			
+			System.out.println();
+			System.out.println("Size is:"+obj.size());
+			
+			System.out.println();
+			System.out.println("Peek element is:"+obj.peek().data);
+		}
+		
 	}
-}
-

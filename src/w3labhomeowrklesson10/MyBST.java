@@ -63,6 +63,53 @@
 			}
 		}
 		
+		public boolean contains(int key){
+			BinaryNode t = root;
+			
+			while(t!=null)
+			{
+				if(t.element == key)
+					return true;
+				if(key>t.element)
+				{
+					t = t.right;
+				}
+				else if(key<t.element)
+				{
+					t=t.left;
+				}
+			}
+			return false;
+			
+		}
+		
+		public BinaryNode getRoot(){
+			return root;
+		}
+		
+		public int leafNodes(BinaryNode t){
+			if(t==null)
+				return 0;
+			if(t.left==null && t.right==null)
+				return 1;
+			else
+			{
+				return leafNodes(t.left)+leafNodes(t.right);
+			}
+		}
+		
+		public int size(){
+			return size(root);
+		}
+		
+		public int size(BinaryNode t)
+		{
+			if(t==null)
+				return 0;
+			else
+				return 1+size(t.left)+size(t.right);
+		}
+		
 		public boolean isLeaf(BinaryNode t)
 		{
 			if(t.left == null && t.right == null)
@@ -70,6 +117,9 @@
 			else
 				return false;
 		}
+		
+		
+		
 		//Assume the data in the Node is an Integer.	
 	
 		public void insert(Integer x) {

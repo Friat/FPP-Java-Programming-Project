@@ -21,47 +21,59 @@
 	
 	// Implement the code
 	
-		public void addLast(String item)
-		{
+		public void addLast(String item) {
 			Node last = findLast();
-			Node n = new Node(last.next, item, null);
-				last.next = n;
-				
-			}
-			
-	// implement the code
-		
-		public void postAddNode(Node n, String value)
-		{
-			Node newNode = null;
-			
-			if(n == null)
-				newNode = new Node(null, value, null);
-			else if(n.next == null)
+			Node newLastNode;
+			if(last == null)
 			{
-				addLast(value);
+				newLastNode = new Node(null,item,null);
 			}
 			else
 			{
-				newNode = new Node(n, value, n.next);
-				n.next.previous = newNode;
-				n.next = newNode;
+				newLastNode = new Node(last,item,null);
+				last.next = newLastNode;
 			}
+		}
+
+			
+	// implement the code
+		
+		public void postAddNode(Node n, String value){
+			Node newNode;
+				if(n==null)
+				{
+					newNode = new Node(null,value,null);
+				}
+				else if(n.next==null)
+				{
+					newNode = new Node(n,value,null);
+					n.next = newNode;
+				}
+				else
+				{
+					newNode = new Node(n,value,n.next);
+					n.next.previous = newNode;
+					n.next=newNode;
+				}
+										
 		}
 			// implement the code
 	
-	       public int Size()
-	       {
-	    	   int size = 0;
-	    	   Node temp = header;
-	    	   while(temp != null){
-	    		   temp = temp.next;
-	    		   size++;
-	    		 }
-	    	   
-	    	   return size;
+		public int Size(){
+	    	int count =0;
+	    	if (header == null)
+	   			return count;
+	   		else {
+	   				Node temp = header;
+	   				count++;
+	   				while (temp.next != null)
+	   				{
+	   					count++;
+	   					temp = temp.next;
+	   				}
+	   				return count;
+	   			}
 	       }
-	
 	// implement code
 	    public boolean isEmpty()
 	{
