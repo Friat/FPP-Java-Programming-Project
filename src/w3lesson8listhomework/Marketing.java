@@ -3,7 +3,7 @@ package w3lesson8listhomework;
 import java.util.ArrayList;
 import java.util.Comparator;
 
-class ComparatorOverload implements Comparator <Marketing>
+/*class ComparatorOverload implements Comparator <Marketing>
 {
 	// Consistent with equal
 	@Override
@@ -16,9 +16,9 @@ class ComparatorOverload implements Comparator <Marketing>
 		if(empName1.compareTo(empName2) != 0){
 			return empName1.compareTo(empName2);
 		}
-		return salesAmount1.compareTo(salesAmount2);
+		return salesAmount1.compareTo(salesAmount2); 
 	}
-	}
+	} */
 public class Marketing 
 {
 	String employeeName;
@@ -56,6 +56,9 @@ public class Marketing
 		mList.set(2,m1);// replace m2 with m1
 		
 		//System.out.println("The objects deletion = " + "\n"+ mList);
+		//
+		System.out.println("list of the available objects");
+		System.out.println();
 		
 		Marketing[] temp = new Marketing[mList.size()];
 		for(int k =0; k < mList.size(); k++){
@@ -65,12 +68,13 @@ public class Marketing
 		}
 		
 		mList.remove(m2);
-		//mList.remove(m4);
+		mList.remove(m4);
 		
-		// Sort
+		//Sorting the objects
 		//mList.so
 		
-		System.out.println("After removal");
+		System.out.println("The list of objects after removing some elements: ");
+		System.out.println();
 		
 		for(int k =0; k < mList.size(); k++){
 			temp[k] = mList.get(k);
@@ -78,7 +82,8 @@ public class Marketing
 			System.out.println(mList.get(k)+ " ");
 		}
 		
-		//System.out.println("Size of mList after deleting objects = " + mList.size());
+		System.out.println();
+		System.out.println("Size of mList after deleting objects = " + mList.size());
 	}
 
 }
